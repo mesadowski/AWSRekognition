@@ -5,13 +5,7 @@ import boto3
 
 def show_custom_labels(model,bucket,photo, min_confidence):
      
-
     client=boto3.client('rekognition')
-
-    s3_connection = boto3.resource('s3')
-
-    s3_object = s3_connection.Object(bucket,photo)
-    s3_response = s3_object.get()
 
     response = client.detect_custom_labels(Image={'S3Object': {'Bucket': bucket, 'Name': photo}},
         MinConfidence=min_confidence,
@@ -33,7 +27,6 @@ def main():
     
     label_count=show_custom_labels(model,bucket,photo, min_confidence)
     print("Custom labels detected: " + str(label_count))
-
 
 if __name__ == "__main__":
     main()
