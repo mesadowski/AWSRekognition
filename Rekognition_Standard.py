@@ -9,7 +9,7 @@ def show_labels(bucket,photo, min_confidence):
     response = client.detect_labels(Image={'S3Object': {'Bucket': bucket, 'Name': photo}},
         MinConfidence=min_confidence)
      
-    print('Detected custom labels for ' + photo)    
+    print('Detected labels for ' + photo)    
     for Label in response['Labels']:
         print('Label ' + str(Label['Name'])) 
         print('Confidence ' + str(Label['Confidence'])) 
@@ -23,7 +23,7 @@ def main():
     min_confidence=90
     
     label_count=show_labels(bucket,photo, min_confidence)
-    print("Custom labels detected: " + str(label_count))
+    print("Labels detected: " + str(label_count))
 
 if __name__ == "__main__":
     main()
